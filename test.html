@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1></h1>
+    <script type="module">
+      import { data, effect } from "./test.js";
+      window.data = data;
+      effect(() => {
+        console.log(data);
+        let el = document.querySelector("h1");
+        el.innerText = `${data.test} ${data.date}`;
+      });
+    </script>
+  </body>
+</html>
