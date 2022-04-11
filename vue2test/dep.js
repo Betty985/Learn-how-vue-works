@@ -4,6 +4,7 @@ class Dep {
     this.subs = [];
   }
   addSub(sub) {
+    console.log("addSub", sub);
     this.subs.push(sub);
   }
   removeSub(sub) {
@@ -16,10 +17,11 @@ class Dep {
       }
     }
   }
-  notify() {
+  notify(newValue) {
+    console.log("notify", this.subs);
     // 通知更新
     for (let sub of this.subs) {
-      sub.update();
+      sub.update(newValue);
     }
   }
 }

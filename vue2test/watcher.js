@@ -5,14 +5,17 @@ export default class Watcher {
     this.$vm = vm;
     this.$expOrFn = expOrFn;
     this.$cb = cb;
+    this.depend();
     this.update();
   }
   depend() {
     Dep.target = this;
-    this.vm[this.expOrFn];
+    this.$vm[this.$expOrFn];
+    console.log("depend", this.$vm[this.$expOrFn]);
     Dep.target = null;
   }
   update() {
+    console.log("update");
     this.$cb.call(this.$vm, this.$vm[this.$expOrFn]);
   }
 }

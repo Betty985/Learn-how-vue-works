@@ -5,12 +5,12 @@ class Vue {
     let { el, data } = obj;
     let dom = document.querySelector(el);
     observe(data);
-    Object.keys(data).forEach(
-      (key) =>
-        new Watcher(data, key, () => {
-          dom.innerText = `${data.a}~~~~~~~~~~${data?.b?.c}`;
-        })
-    );
+    new Watcher(data, "a", (newValue) => {
+      dom.innerHTML = `${newValue} ${data.b}`;
+    });
+    new Watcher(data, "b", (newValue) => {
+      dom.innerHTML = `${data.a} ${newValue}`;
+    });
   }
 }
 window.o = {
