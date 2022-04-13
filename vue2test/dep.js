@@ -17,10 +17,14 @@ class Dep {
       }
     }
   }
+  depend() {
+    Dep.target && this.addSub(Dep.target);
+  }
   notify(newValue) {
     console.log("notify", this.subs);
+    const subs = this.subs.slice();
     // 通知更新
-    for (let sub of this.subs) {
+    for (let sub of subs) {
       sub.update(newValue);
     }
   }

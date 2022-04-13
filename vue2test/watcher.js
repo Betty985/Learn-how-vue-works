@@ -1,18 +1,19 @@
 // 依赖
 import Dep from "./dep.js";
+import { parsePath } from "./utils.js";
 export default class Watcher {
   constructor(vm, expOrFn, cb) {
     this.$vm = vm;
-    this.$expOrFn = expOrFn;
+    this.$expOrFn = parsePath(expOrFn);
     this.$cb = cb;
-    this.depend();
-    this.update();
+    this.value = this.get();
   }
-  depend() {
+  get() {
     Dep.target = this;
-    this.$vm[this.$expOrFn];
+    let value = this.$cb.call(this.$vm, this.$vm[this.$expOrFn]);
     console.log("depend", this.$vm[this.$expOrFn]);
     Dep.target = null;
+    return value;
   }
   update() {
     console.log("update");

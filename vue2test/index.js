@@ -1,10 +1,10 @@
-import observe from "./observe.js";
+import Observer from "./observe.js";
 import Watcher from "./watcher.js";
 class Vue {
   constructor(obj) {
     let { el, data } = obj;
     let dom = document.querySelector(el);
-    observe(data);
+    new Observer(data);
     new Watcher(data, "a", (newValue) => {
       dom.innerHTML = `${newValue} ${data.b}`;
     });
@@ -15,7 +15,7 @@ class Vue {
 }
 window.o = {
   a: 1,
-  b: { c: "d" },
+  b: [1, 2, 3],
 };
 
 new Vue({
